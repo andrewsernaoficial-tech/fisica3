@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corriente eléctrica y ley de Ohm · Física II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head><body>
+<header class="top"><div class="top-in">
+  <div class="ttl"><h1>Corriente eléctrica y ley de Ohm</h1><p>Simulador interactivo · Física II, Unidad III</p></div>
+  <nav role="tablist" aria-label="Módulos"><button id="t1" class="on" role="tab" aria-selected="true">Ley de Ohm</button><button id="t2" role="tab" aria-selected="false">Circuitos</button></nav>
+</div></header>
+
+<main>
+<section id="p1">
+  <div class="lay">
+    <div class="sheet ctl">
+      <h2>Parámetros</h2>
+      <div class="fld"><label for="V">Voltaje <b id="vV">12 V</b></label><input type="range" id="V" min="0" max="24" step="0.1" value="12"><div class="tk"><span>0 V</span><span>24 V</span></div></div>
+      <div class="fld r"><label for="R">Resistencia <b id="vR">100 Ω</b></label><input type="range" id="R" min="1" max="1000" step="1" value="100"><div class="tk"><span>1 Ω</span><span>1000 Ω</span></div></div>
+      <h3>Relaciones</h3>
+      <dl class="eq"><dt>V = I·R</dt><dd>Ley de Ohm</dd><dt>I = V/R</dt><dd>Corriente</dd><dt>R = V/I</dt><dd>Resistencia</dd><dt>P = V·I = I²R</dt><dd>Potencia disipada</dd></dl>
+    </div>
+    <div class="col">
+      <div class="sheet read">
+        <div class="cell v"><span class="k">Voltaje</span><b id="oV"></b><div class="bar"><span id="bV"></span></div></div>
+        <div class="cell r"><span class="k">Resistencia</span><b id="oR"></b></div>
+        <div class="cell i"><span class="k">Corriente <em>I = V/R</em></span><b id="oI"></b><div class="bar"><span id="bI"></span></div></div>
+        <div class="cell p"><span class="k">Potencia <em>P = V·I</em></span><b id="oP"></b><div class="bar"><span id="bP"></span></div></div>
+      </div>
+      <div class="sheet"><h2>Característica I–V</h2><canvas id="cv" width="720" height="400" aria-label="Gráfica de corriente contra voltaje"></canvas>
+        <p class="note">La línea continua es tu resistencia (pendiente 1/R). Las punteadas son R/2 y 2R. El punto marca el estado actual.</p></div>
+    </div>
+  </div>
+  <div class="sheet"><h2>Flujo de corriente en el circuito</h2><canvas id="fl" width="1000" height="300" aria-label="Animación del flujo de corriente"></canvas>
+    <p class="note">Los electrones avanzan más rápido al aumentar I. El resistor pasa de azul a rojo según la potencia que disipa.</p></div>
+</section>
+
+<section id="p2" hidden>
+  <div class="lay">
+    <div class="sheet ctl">
+      <h2>Configuración</h2>
+      <div class="fld"><label for="mode">Tipo de circuito</label><select id="mode"><option value="s">Serie · R1 + R2 + R3</option><option value="p">Paralelo · R1 ‖ R2 ‖ R3</option><option value="m">Mixto · R1 + (R2 ‖ R3)</option></select></div>
+      <div class="row"><label for="cV">Fuente</label><span class="num"><input type="number" id="cV" value="12" min="0" step="0.5"><u>V</u></span></div>
+      <div class="row"><label for="r1">R1</label><span class="num"><input type="number" id="r1" value="100" min="0.1" step="1"><u>Ω</u></span></div>
+      <div class="row"><label for="r2">R2</label><span class="num"><input type="number" id="r2" value="200" min="0.1" step="1"><u>Ω</u></span></div>
+      <div class="row"><label for="r3">R3</label><span class="num"><input type="number" id="r3" value="300" min="0.1" step="1"><u>Ω</u></span></div>
+      <h3>Ejemplos</h3>
+      <div class="presets"><button data-pre="a">Serie</button><button data-pre="b">Paralelo</button><button data-pre="c">Mixto</button></div>
+    </div>
+    <div class="sheet"><h2>Esquema del circuito</h2><svg id="dg" viewBox="0 0 400 190" role="img" aria-label="Esquema del circuito"></svg>
+      <p class="note">Los puntos amarillos son la corriente: van más rápido cuanto mayor es. El color de cada resistor indica su potencia disipada.</p></div>
+  </div>
+  <div class="sheet">
+    <div class="read">
+      <div class="cell v"><span class="k">Fuente</span><b id="vt"></b></div>
+      <div class="cell r"><span class="k">R equivalente</span><b id="rq"></b></div>
+      <div class="cell i"><span class="k">Corriente total</span><b id="it"></b></div>
+      <div class="cell p"><span class="k">Potencia total</span><b id="pt"></b></div>
+    </div>
+    <div class="sc"><table><thead><tr><th>Resistor</th><th>R (Ω)</th><th>V (V)</th><th>I (mA)</th><th>P (mW)</th></tr></thead><tbody id="tb"></tbody></table></div>
+    <div class="chk" id="chk"></div>
+  </div>
+</section>
+</main>
+<footer><span>Proyecto final</span><span>Simulador interactivo de campos eléctricos y magnéticos</span><span>Unidad III</span></footer>
+<script src="app.js"></script>
+</body></html>
